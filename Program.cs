@@ -7,6 +7,7 @@ namespace ConsoleTamaguchiApp
 {
     class Program
     {
+        //try
         static void Main(string[] args)
         {
             UIMain ui = new UIMain(new LoginScreen());
