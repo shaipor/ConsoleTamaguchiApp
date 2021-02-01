@@ -19,7 +19,7 @@ namespace Tamagotchi.UI
             try
             {
                 Console.WriteLine("which food would you like to give your pet?");
-                List<Actions> list = UIMain.db.showFeedingActions();
+                List<Actions> list = UIMain.api.showFeedingActions();
 
                 ObjectsList list1 = new ObjectsList(" ", list.ToList<object>());
                 //ObjectsList list1 = new ObjectsList("Animals", list);

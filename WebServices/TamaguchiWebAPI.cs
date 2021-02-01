@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace ConsoleTamaguchiApp.WebServices
 {
-    public class TamaguchiWebAPI
+    public class TamagotchiWebAPI
     {
         private HttpClient client;
         private string baseUri;
 
-        public TamaguchiWebAPI(string baseUri)
+        public TamagotchiWebAPI(string baseUri)
         {
             //Set client handler to support cookies!!
             HttpClientHandler handler = new HttpClientHandler();

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using ConsoleTamaguchiApp.UI;
+using ConsoleTamaguchiApp.WebServices;
+using Tamagotchi.UI;
 
 namespace ConsoleTamaguchiApp
 {
