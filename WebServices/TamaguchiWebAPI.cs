@@ -24,7 +24,7 @@ namespace ConsoleTamaguchiApp.WebServices
             this.baseUri = baseUri;
         }
 
-        public async Task<List<AnimalDTO>> GetPlayerAnimalsAsync()
+        public async Task<List<PetsDTO>> GetPlayerAnimalsAsync()
         {
             try
             {
@@ -37,7 +37,7 @@ namespace ConsoleTamaguchiApp.WebServices
                         PropertyNameCaseInsensitive = true
                     };
                     string content = await response.Content.ReadAsStringAsync();
-                    List<AnimalDTO> fList = JsonSerializer.Deserialize<List<AnimalDTO>>(content, options);
+                    List<PetsDTO> fList = JsonSerializer.Deserialize<List<PetsDTO>>(content, options);
                     return fList;
                 }
                 else
@@ -78,5 +78,31 @@ namespace ConsoleTamaguchiApp.WebServices
                 return null;
             }
         }
+
+        public async Task<PlayerDTO> SignUpAsync()
+        {
+            try
+            {
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/SignUp");
+                if (response.IsSuccessStatusCode)
+                {
+                    
+
+
+                }
+
+
+
+
+
+                }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+
     }
 }

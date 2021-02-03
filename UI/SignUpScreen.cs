@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Tamagotchi.Models;
+using ConsoleTamaguchiApp.DataTransferObjects;
 using System.Text.RegularExpressions;
 
 namespace Tamagotchi.UI
@@ -16,28 +16,29 @@ namespace Tamagotchi.UI
         {
             base.Show();
             Console.WriteLine("enter user name");
-            string userName = Console.ReadLine();
-            while(UIMain.db.PlayerExistByUserName(userName) || userName=="")
+            string UserName = Console.ReadLine();
+            while(UIMain.db.PlayerExistByUserName(UserName) || UserName == "")
             {
-                if(userName == "")
+                if(UserName == "")
                     Console.WriteLine("invalid user name! Try somthing else: ");
-                if(UIMain.db.PlayerExistByUserName(userName))
+                if(UIMain.db.PlayerExistByUserName(UserName))
                 Console.WriteLine("This user name alreadt exist! Try somthing else: ");
-                userName = Console.ReadLine();
+                UserName = Console.ReadLine();
             }
             Console.WriteLine("enter your first name");
-            string firstName = Console.ReadLine();
-            firstName= UIMain.db.checkString(firstName,"first name");
+            string PlayerName = Console.ReadLine();
+            PlayerName = UIMain.db.checkString(PlayerName, "first name");
             Console.WriteLine("enter last name");
-            string lastName = Console.ReadLine();
-           lastName= UIMain.db.checkString(lastName, "last name");
+            string LastName = Console.ReadLine();
+           LastName= UIMain.db.checkString(LastName, "last name");
             Console.WriteLine("enter mail");
 
-            string mail = Console.ReadLine();
-           mail= UIMain.db.checkString(mail, "mail");
+            string Email = Console.ReadLine();
+           Email= UIMain.db.checkString(Email, "mail");
             Console.WriteLine("enter gender");
-            string gender = Console.ReadLine();
-            gender= UIMain.db.checkGender(gender);
+            string Gender = Console.ReadLine();
+            Gender= UIMain.db.checkGender(Gender);
+
             Console.WriteLine("enter birth year");
             int bdYear = int.Parse(Console.ReadLine());
             while(bdYear<1900 || bdYear>2020)
@@ -62,7 +63,7 @@ namespace Tamagotchi.UI
                 bdDay = int.Parse(Console.ReadLine());
 
             }
-            DateTime playerDateTime = new DateTime(bdYear, bdMonth, bdDay);
+            DateTime BirthDate = new DateTime(bdYear, bdMonth, bdDay);
             //Console.WriteLine("enter birth date");
             //string playerDateTimeString = Console.ReadLine(); 
             //try
@@ -75,18 +76,18 @@ namespace Tamagotchi.UI
             //}
             ////DateTime playerDateTime = DateTime.Parse(Console.ReadLine());
             Console.WriteLine("enter password");
-            string password = Console.ReadLine();
-            password= UIMain.db.checkString(password, "password");
+            string Password = Console.ReadLine();
+            Password = UIMain.db.checkString(Password, "password");
 
-            Players P = new Players();
-            P.UserName = userName;
-            P.FirstName = firstName;
-            P.LastName = lastName;
-            P.Mail = mail;
-            P.Gender = gender;
-            P.PlayerBirthDate = playerDateTime;
-            P.Password = password;
-           
+            PlayerDTO P = new PlayerDTO();
+            P.UserName = UserName;
+            P.PlayerName = PlayerName;
+            P.LastName = LastName;
+            P.Email = Email;
+            P.Gender = Gender;
+            P.BirthDate = BirthDate;
+            P.Password = Password;
+
             try
             {
                 UIMain.db.AddPlayer(P);
@@ -101,6 +102,8 @@ namespace Tamagotchi.UI
             catch(Exception e)
             {
                 Console.WriteLine("sign up failed, try again later");
+                Console.WriteLine(e);
+                Console.ReadKey();
             }
             
 

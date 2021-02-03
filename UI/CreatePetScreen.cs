@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Tamagotchi.Models;
+using ConsoleTamaguchiApp.DataTransferObjects;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -21,7 +21,7 @@ namespace Tamagotchi.UI
             string petName = Console.ReadLine();
             try
             {
-                Pets pet = UIMain.db.Pets.CreateProxy(petName);
+                PetsDTO pet = UIMain.db.Pets.CreateProxy(petName);
                 UIMain.CurrentPlayer.Pets.Add(pet);
                 UIMain.db.SaveChanges();
                 Console.WriteLine($"you created pet succesfully!");
