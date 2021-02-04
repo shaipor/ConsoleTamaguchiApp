@@ -52,11 +52,11 @@ namespace ConsoleTamaguchiApp.WebServices
             }
         }
 
-        public async Task<PlayerDTO> LoginAsync(string email, string pass)
+        public async Task<PlayerDTO> LoginAsync(string userName, string pass)
         {
             try
             {
-                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/Login?email={email}&pass={pass}");
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/Login?userName={userName}&pass={pass}");
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
@@ -81,16 +81,22 @@ namespace ConsoleTamaguchiApp.WebServices
 
         public async Task<PlayerDTO> SignUpAsync()
         {
+            string json = JsonSerializer.Serialize();
+
+
+
+
+
+
             try
             {
-                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/SignUp");
-                if (response.IsSuccessStatusCode)
-                {
+                //HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/SignUp");
+                //if (response.IsSuccessStatusCode)
+                //{
                     
 
 
-                }
-
+                //}
 
 
 

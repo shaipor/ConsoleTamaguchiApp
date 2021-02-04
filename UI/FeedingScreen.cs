@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Tamagotchi.Models;
+using ConsoleTamaguchiApp.DataTransferObjects;
 using System.Linq;
 
 namespace Tamagotchi.UI

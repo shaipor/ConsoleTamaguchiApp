@@ -14,30 +14,31 @@ namespace Tamagotchi.UI
         }
         public override void Show()
         {
+
             base.Show();
             Console.WriteLine("enter user name");
             string UserName = Console.ReadLine();
-            while(UIMain.db.PlayerExistByUserName(UserName) || UserName == "")
+            while(UIMain.api.PlayerExistByUserName(UserName) || UserName == "")
             {
                 if(UserName == "")
                     Console.WriteLine("invalid user name! Try somthing else: ");
-                if(UIMain.db.PlayerExistByUserName(UserName))
+                if(UIMain.api.PlayerExistByUserName(UserName))
                 Console.WriteLine("This user name alreadt exist! Try somthing else: ");
                 UserName = Console.ReadLine();
             }
             Console.WriteLine("enter your first name");
             string PlayerName = Console.ReadLine();
-            PlayerName = UIMain.db.checkString(PlayerName, "first name");
+            PlayerName = UIMain.api.checkString(PlayerName, "first name");
             Console.WriteLine("enter last name");
             string LastName = Console.ReadLine();
-           LastName= UIMain.db.checkString(LastName, "last name");
+           LastName= UIMain.api.checkString(LastName, "last name");
             Console.WriteLine("enter mail");
 
             string Email = Console.ReadLine();
-           Email= UIMain.db.checkString(Email, "mail");
+           Email= UIMain.api.checkString(Email, "mail");
             Console.WriteLine("enter gender");
             string Gender = Console.ReadLine();
-            Gender= UIMain.db.checkGender(Gender);
+            Gender= UIMain.api.checkGender(Gender);
 
             Console.WriteLine("enter birth year");
             int bdYear = int.Parse(Console.ReadLine());
@@ -77,7 +78,7 @@ namespace Tamagotchi.UI
             ////DateTime playerDateTime = DateTime.Parse(Console.ReadLine());
             Console.WriteLine("enter password");
             string Password = Console.ReadLine();
-            Password = UIMain.db.checkString(Password, "password");
+            Password = UIMain.api.checkString(Password, "password");
 
             PlayerDTO P = new PlayerDTO();
             P.UserName = UserName;
@@ -90,8 +91,8 @@ namespace Tamagotchi.UI
 
             try
             {
-                UIMain.db.AddPlayer(P);
-                UIMain.db.SaveChanges();
+                UIMain.api.AddPlayer(P);
+                UIMain.api.SaveChanges();
                 Console.WriteLine($"you singed up succesfully! {P.UserName}");
                 //Console.ReadKey();
                 UIMain.CurrentPlayer = P;

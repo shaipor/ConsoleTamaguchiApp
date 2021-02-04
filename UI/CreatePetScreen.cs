@@ -21,7 +21,7 @@ namespace Tamagotchi.UI
             string petName = Console.ReadLine();
             try
             {
-                Pets pet = UIMain.api.Pets.CreateProxy(petName);
+                PetsDTO pet = UIMain.api.pet.CreateProxy(petName);
                 UIMain.CurrentPlayer.Pets.Add(pet);
                 UIMain.api.SaveChanges();
                 Console.WriteLine($"you created pet succesfully!");
