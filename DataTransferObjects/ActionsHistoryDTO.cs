@@ -4,8 +4,8 @@ using System.Text;
 
 namespace ConsoleTamaguchiApp.DataTransferObjects
 {
-    class ActionsHistoryDTO
-    {
+     public class ActionsHistoryDTO
+     {
         public int historyId { get; set; }
 
         public string userName { get; set; }
@@ -24,5 +24,5 @@ namespace ConsoleTamaguchiApp.DataTransferObjects
         public int actionEffection { get; set; }
 
         public ActionsHistoryDTO() { }
-    }
+     }
 }

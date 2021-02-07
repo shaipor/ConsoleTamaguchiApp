@@ -52,38 +52,57 @@ namespace ConsoleTamaguchiApp.WebServices
             }
         }
 
-        public Task<PlayerDTO> showPlayingActions(string userName, string pass)
+        public async Task<List<ActionsDTO>> GetAllGamesAsync()
         {
-            
-
-
-        }
-
-            public async Task<PetsDTO> PlayWithAnimalAsync(ActionsDTO ac)
+            try
             {
-
-                try
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetAllGames");
+                if (response.IsSuccessStatusCode)
                 {
-                    HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/PlayWithAnimal?action={ac.actionId}", null);
-                    //if (response.IsSuccessStatusCode)
-                    //{
-                        JsonSerializerOptions options = new JsonSerializerOptions
-                        {
-                            PropertyNameCaseInsensitive = true
-                        };
-
-                        //string content = await response.Content.ReadAsStringAsync();
-                        //PetsDTO p = JsonSerializer.Deserialize<PetsDTO>(content, options);
-                        //return p;
-                    //}
-                    
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    List<ActionsDTO> fList = JsonSerializer.Deserialize<List<ActionsDTO>>(content, options);
+                    return fList;
                 }
-                catch (Exception e)
+                else
                 {
-                    Console.WriteLine(e.Message);
                     return null;
                 }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public async Task<bool> PlayAsync(ActionsDTO actionsDTO)
+        {
+            //Set URI to the specific function API
+            string url = $"{this.baseUri}/Play";
+            try
+            {
+                //Call the server API
+                string json = JsonSerializer.Serialize(actionsDTO);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                //Check status
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
 
         public async Task<PlayerDTO> LoginAsync(string userName, string pass)
         {
