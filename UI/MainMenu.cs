@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Tamagotchi.Models;
+
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,7 +14,7 @@ namespace Tamagotchi.UI
             //Build items in main menu!
             AddItem("Show Player", new PlayerScreen());
             AddItem("feed animal", new FeedingScreen());
-            AddItem("watch actions history", new ActionsHistoryScreen());
+            //AddItem("watch actions history", new ActionsHistoryScreen());
             AddItem("show animal", new PetInformationScreen());
 
 
