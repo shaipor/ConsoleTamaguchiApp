@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Threading.Tasks;
+using ConsoleTamaguchiApp.DataTransferObjects;
 
 namespace Tamagotchi.UI
 {
@@ -25,13 +27,15 @@ namespace Tamagotchi.UI
                 Console.WriteLine();
                 //Create list to be displayed on screen
                 //Format the desired fields to be shown! (screen is not wide enough to show all)
-                List<Object> animals = (from animalList in UIMain.CurrentPlayer.Pets
+                Task<List<PetsDTO>> petl = UIMain.api.GetPlayerAnimalsAsync();
+                petl.Wait();
+                List <Object> animals = (from animalList in petl.Result
                                         select new
                                         {
-                                            ID = animalList.PetId,
-                                            Name = animalList.PetName,
-                                            BirthDate = animalList.PetBirthDate.ToShortDateString(),
-                                            Weight = $"{animalList.Weigth:F2}"
+                                            ID = animalList.petId,
+                                            Name = animalList.petName,
+                                            BirthDate = animalList.BirthDate.ToShortDateString(),
+                                            Weight = $"{animalList.petWeight:F2}"
                                         }).ToList<Object>();
                 ObjectsList list = new ObjectsList("Animals", animals);
                 list.Show();

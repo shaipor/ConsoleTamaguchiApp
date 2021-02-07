@@ -15,7 +15,7 @@ namespace Tamagotchi.UI
             AddItem("Show Player", new PlayerScreen());
             AddItem("feed animal", new FeedingScreen());
             //AddItem("watch actions history", new ActionsHistoryScreen());
-            AddItem("show animal", new PetInformationScreen());
+            //AddItem("show animal", new PetInformationScreen());
 
 
         }

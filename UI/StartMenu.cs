@@ -10,7 +10,7 @@ namespace Tamagotchi.UI
         {
             //Build items in main menu!
             AddItem("log into Existsing account", new LoginScreen());
-            AddItem("sign up to Tamagotchi!", new SignUpScreen());
+            //AddItem("sign up to Tamagotchi!", new SignUpScreen());
 
         }
     }

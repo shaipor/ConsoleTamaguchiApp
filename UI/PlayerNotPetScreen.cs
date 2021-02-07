@@ -29,8 +29,8 @@ namespace Tamagotchi.UI
                 Console.WriteLine();
                 //Create list to be displayed on screen
                 //Format the desired fields to be shown! (screen is not wide enough to show all)
-                CreatePetScreen cp = new CreatePetScreen();
-                cp.Show();
+                //CreatePetScreen cp = new CreatePetScreen();
+                //cp.Show();
                 Console.WriteLine();
                 Console.WriteLine("Press any key to go back!");
                 char d = Console.ReadKey().KeyChar;
