@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Tamagotchi.Models;
+using ConsoleTamaguchiApp.DataTransferObjects;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Tamagotchi.UI
 {
@@ -11,7 +13,7 @@ namespace Tamagotchi.UI
         {
 
         }
-        private TamagotchiContext bl;
+        
         public override void Show()
         {
             //Clear screen and set title (implemented by Screen Show)
@@ -25,7 +27,7 @@ namespace Tamagotchi.UI
                 if (c == 'Y' || c == 'y')
                 {
                     //Save all changes to DB before logging out
-                    UIMain.db.SaveChanges();
+                    
                     UIMain.CurrentPlayer = null;
                 }
             }
@@ -40,8 +42,9 @@ namespace Tamagotchi.UI
                 string userName = Console.ReadLine();
                 Console.WriteLine($"Please enter your password: ");
                 string password = Console.ReadLine();
-
-                UIMain.CurrentPlayer = UIMain.db.Login(userName, password);
+                Task<PlayerDTO> pl= UIMain.api.LoginAsync(userName, password);
+                pl.Wait();
+                UIMain.CurrentPlayer = pl.Result;
                 //UIMain.CurrentPlayer = UIMain.db.Login("odedporat@gmail.com", "12345");
 
                 if (UIMain.CurrentPlayer == null)
@@ -53,7 +56,12 @@ namespace Tamagotchi.UI
 
             //if (UIMain.CurrentPlayer.Pets.Count != 0)
             //if (UIMain.CurrentPlayer.Pets != null)
-            if(UIMain.CurrentPlayer.HasActiveAnimal())
+            Task<bool> isHasActive = (UIMain.api.HasActiveAnimal());
+            isHasActive.Wait();
+            bool b = isHasActive.Result;
+
+
+            if (b)
             {
                 MainMenu menu = new MainMenu();
                 menu.Show();

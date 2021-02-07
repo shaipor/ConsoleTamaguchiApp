@@ -5,17 +5,22 @@ using System.Threading.Tasks;
 
 namespace ConsoleTamaguchiApp.DataTransferObjects
 {
-    public class AnimalDTO
+
+    public class PetsDTO
+
     {
-        public int AnimalId { get; set; }
-        public string AnimalName { get; set; }
-        public int PlayerId { get; set; }
-        public double AnimalWeight { get; set; }
+        public int petId { get; set; }
+        public string petName { get; set; }
+        public string userName { get; set; }
+        public double petWeight { get; set; }
         public DateTime BirthDate { get; set; }
-        public int HungryLevel { get; set; }
+        public int HungerLevel { get; set; }
         public int HygieneLevel { get; set; }
-        public int HappinessLevel { get; set; }
-        
-        public AnimalDTO() { }
+        public int HappinesLevel { get; set; }
+        public int lifeCycleId { get; set; }
+
+
+        public PetsDTO() { }
     }
+    
 }

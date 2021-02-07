@@ -24,7 +24,7 @@ namespace ConsoleTamaguchiApp.WebServices
             this.baseUri = baseUri;
         }
 
-        public async Task<List<AnimalDTO>> GetPlayerAnimalsAsync()
+        public async Task<List<PetsDTO>> GetPlayerAnimalsAsync()
         {
             try
             {
@@ -37,7 +37,7 @@ namespace ConsoleTamaguchiApp.WebServices
                         PropertyNameCaseInsensitive = true
                     };
                     string content = await response.Content.ReadAsStringAsync();
-                    List<AnimalDTO> fList = JsonSerializer.Deserialize<List<AnimalDTO>>(content, options);
+                    List<PetsDTO> fList = JsonSerializer.Deserialize<List<PetsDTO>>(content, options);
                     return fList;
                 }
                 else
@@ -78,5 +78,78 @@ namespace ConsoleTamaguchiApp.WebServices
                 return null;
             }
         }
+        public async Task<List<ActionsDTO>> GetFeedingActionsAsync()
+        {
+            try 
+            {
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetFeedingActions");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    List<ActionsDTO> fList = JsonSerializer.Deserialize<List<ActionsDTO>>(content, options);
+                    return fList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+
+        }
+        public async Task<PetsDTO>  FeedAnimalAsync(ActionsDTO ac)
+        {
+            try
+            {
+
+                HttpResponseMessage response = await this.client.PostAsync($"/FeedAnimal?action={ac.actionId}",null);
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    PetsDTO p = JsonSerializer.Deserialize<PetsDTO>(content, options);
+                    return p;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+        public async Task<bool> HasActiveAnimal()
+        {
+            HttpResponseMessage response = await this.client.PostAsync($"/HasActiveAnimal", null);
+            if (response.IsSuccessStatusCode)
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                string content = await response.Content.ReadAsStringAsync();
+                PetsDTO p = JsonSerializer.Deserialize<PetsDTO>(content, options);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
-}
+    }
+

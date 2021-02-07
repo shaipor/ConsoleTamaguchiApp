@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConsoleTamaguchiApp.DataTransferObjects
 {
-    class ActionsDTO
+    public class ActionsDTO
     {
         public int actionId { get; set; }
         public string actionName { get; set; }
