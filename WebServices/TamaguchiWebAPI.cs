@@ -52,6 +52,39 @@ namespace ConsoleTamaguchiApp.WebServices
             }
         }
 
+        public Task<PlayerDTO> showPlayingActions(string userName, string pass)
+        {
+            
+
+
+        }
+
+            public async Task<PetsDTO> PlayWithAnimalAsync(ActionsDTO ac)
+            {
+
+                try
+                {
+                    HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/PlayWithAnimal?action={ac.actionId}", null);
+                    //if (response.IsSuccessStatusCode)
+                    //{
+                        JsonSerializerOptions options = new JsonSerializerOptions
+                        {
+                            PropertyNameCaseInsensitive = true
+                        };
+
+                        //string content = await response.Content.ReadAsStringAsync();
+                        //PetsDTO p = JsonSerializer.Deserialize<PetsDTO>(content, options);
+                        //return p;
+                    //}
+                    
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+            }
+
         public async Task<PlayerDTO> LoginAsync(string userName, string pass)
         {
             try
@@ -79,36 +112,7 @@ namespace ConsoleTamaguchiApp.WebServices
             }
         }
 
-        public async Task<PlayerDTO> SignUpAsync()
-        {
-            string json = JsonSerializer.Serialize();
-
-
-
-
-
-
-            try
-            {
-                //HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/SignUp");
-                //if (response.IsSuccessStatusCode)
-                //{
-                    
-
-
-                //}
-
-
-
-
-                }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
-        }
-
+      
 
     }
 }
