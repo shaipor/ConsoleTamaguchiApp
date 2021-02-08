@@ -109,7 +109,7 @@ namespace ConsoleTamaguchiApp.WebServices
         {
             try
             {
-                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/Login?userName={userName}&pass={pass}");
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}api/Login?userName={userName}&pass={pass}");
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
