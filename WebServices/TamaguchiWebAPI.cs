@@ -38,6 +38,7 @@ namespace ConsoleTamaguchiApp.WebServices
                     };
                     string content = await response.Content.ReadAsStringAsync();
                     List<PetsDTO> fList = JsonSerializer.Deserialize<List<PetsDTO>>(content, options);
+                    List<PetsDTO> fList = JsonSerializer.Deserialize<List<PetsDTO>>(content, options);
                     return fList;
                 }
                 else
@@ -52,11 +53,63 @@ namespace ConsoleTamaguchiApp.WebServices
             }
         }
 
-        public async Task<PlayerDTO> LoginAsync(string email, string pass)
+        public async Task<List<ActionsDTO>> GetAllGamesAsync()
         {
             try
             {
-                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/Login?email={email}&pass={pass}");
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetAllGames");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    List<ActionsDTO> fList = JsonSerializer.Deserialize<List<ActionsDTO>>(content, options);
+                    return fList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public async Task<bool> PlayAsync(ActionsDTO actionsDTO)
+        {
+            //Set URI to the specific function API
+            string url = $"{this.baseUri}/Play";
+            try
+            {
+                //Call the server API
+                string json = JsonSerializer.Serialize(actionsDTO);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                //Check status
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
+
+        public async Task<PlayerDTO> LoginAsync(string userName, string pass)
+        {
+            try
+            {
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/Login?userName={userName}&pass={pass}");
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
@@ -153,3 +206,8 @@ namespace ConsoleTamaguchiApp.WebServices
     }
     }
 
+
+      
+
+    }
+}

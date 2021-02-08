@@ -12,5 +12,5 @@ namespace ConsoleTamaguchiApp.DataTransferObjects
         public int actionEffection { get; set; }
 
         public ActionsDTO() { }
-    }
+     }
 }
