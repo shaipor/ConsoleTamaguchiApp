@@ -38,7 +38,7 @@ namespace ConsoleTamaguchiApp.WebServices
                     };
                     string content = await response.Content.ReadAsStringAsync();
                     List<PetsDTO> fList = JsonSerializer.Deserialize<List<PetsDTO>>(content, options);
-                    List<PetsDTO> fList = JsonSerializer.Deserialize<List<PetsDTO>>(content, options);
+                    //List<PetsDTO> fList = JsonSerializer.Deserialize<List<PetsDTO>>(content, options);
                     return fList;
                 }
                 else
@@ -208,6 +208,3 @@ namespace ConsoleTamaguchiApp.WebServices
 
 
       
-
-    }
-}
