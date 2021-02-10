@@ -35,7 +35,7 @@ namespace Tamagotchi.UI
                 const int DEAD_STATUS_ID = 4;
                 Task<List<PetsDTO>> pts = UIMain.api.GetPlayerAnimalsAsync();
                 pts.Wait();
-                PetsDTO pe = (pts.Result.Where(p => p.lifeCycleId != DEAD_STATUS_ID).FirstOrDefault());
+                PetsDTO pe = (pts.Result.Where(p => p.LifeCycleId != DEAD_STATUS_ID).FirstOrDefault());
                 ActionsDTO ac = feedingActions.Where(a => a.actionId == idfeed).FirstOrDefault();
                 if (pe == null)
                     Console.WriteLine("there is no active pet");

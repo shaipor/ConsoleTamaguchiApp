@@ -18,7 +18,6 @@ namespace ConsoleTamaguchiApp.DataTransferObjects
         public int HungerLevel { get; set; }
         public int HygieneLevel { get; set; }
         public int HappinesLevel { get; set; }
-        public int lifeCycleId { get; set; }
 
         public int StatusId { get; set; }
         public int LifeCycleId { get; set; }
