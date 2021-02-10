@@ -195,8 +195,8 @@ namespace ConsoleTamaguchiApp.WebServices
                     PropertyNameCaseInsensitive = true
                 };
                 string content = await response.Content.ReadAsStringAsync();
-                PetsDTO p = JsonSerializer.Deserialize<PetsDTO>(content, options);
-                return true;
+                bool p = JsonSerializer.Deserialize<bool>(content, options);
+                return p;
             }
             else
             {
