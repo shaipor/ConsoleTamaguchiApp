@@ -24,24 +24,51 @@ namespace Tamagotchi.UI
             char c = Console.ReadKey().KeyChar;
             if (c == 'a' || c == 'A')
             {
+                //Read first the animals of the player
+                Task<List<PetsDTO>> t = UIMain.api.GetPlayerAnimalsAsync();
+                Console.WriteLine("Reading player anuimals...");
+                t.Wait();
+                List<PetsDTO> list = t.Result;
+                if (list != null)
+                {
+                    //Create list to be displayed on screen
+                    //Format the desired fields to be shown! (screen is not wide enough to show all)
+
+                    List<Object> animals = list.ToList<Object>();
+                    ObjectsList oList = new ObjectsList("Animals", animals);
+                    oList.Show();
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine("Animals could not be read!");
+                }
                 Console.WriteLine();
-                //Create list to be displayed on screen
-                //Format the desired fields to be shown! (screen is not wide enough to show all)
-                Task<List<PetsDTO>> petl = UIMain.api.GetPlayerAnimalsAsync();
-                petl.Wait();
-                List <Object> animals = (from animalList in petl.Result
-                                        select new
-                                        {
-                                            ID = animalList.petId,
-                                            Name = animalList.petName,
-                                            BirthDate = animalList.BirthDate.ToShortDateString(),
-                                            Weight = $"{animalList.petWeight:F2}"
-                                        }).ToList<Object>();
-                ObjectsList list = new ObjectsList("Animals", animals);
-                list.Show();
-                Console.WriteLine();
-                Console.WriteLine("Press any key to go back!");
-                char d = Console.ReadKey().KeyChar;
+
+                //if (c == 'a' || c == 'A')
+                //{
+
+                //    Console.WriteLine();
+                //    //Create list to be displayed on screen
+                //    //Format the desired fields to be shown! (screen is not wide enough to show all)
+                //    Task<List<PetsDTO>> petl = UIMain.api.GetPlayerAnimalsAsync();
+                //    petl.Wait();
+                //    List <Object> animals = (from animalList in petl.Result
+                //                            select new
+                //                            {
+                //                                ID = animalList.petId,
+                //                                Name = animalList.petName,
+                //                                BirthDate = animalList.BirthDate.ToShortDateString(),
+                //                                Weight = $"{animalList.petWeight:F2}"
+                //                            }).ToList<Object>();
+                //    ObjectsList list = new ObjectsList("Animals", animals);
+                //    list.Show();
+                //    Console.WriteLine();
+                //    Console.WriteLine("Press any key to go back!");
+                //    char d = Console.ReadKey().KeyChar;
+
+
+
                 //if (d == 'a' || d == 'A')
                 //{
                 //    FeedingScreen f = new FeedingScreen();

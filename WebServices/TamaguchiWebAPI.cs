@@ -29,7 +29,7 @@ namespace ConsoleTamaguchiApp.WebServices
             try
             {
 
-                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetAnimals");
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}api/GetAnimals");
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
@@ -57,7 +57,7 @@ namespace ConsoleTamaguchiApp.WebServices
         {
             try
             {
-                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetAllGames");
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}api/GetAllGames");
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
