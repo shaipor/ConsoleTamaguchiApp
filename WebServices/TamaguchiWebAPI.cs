@@ -187,7 +187,7 @@ namespace ConsoleTamaguchiApp.WebServices
         }
         public async Task<bool> HasActiveAnimal()
         {
-            HttpResponseMessage response = await this.client.PostAsync($"/HasActiveAnimal", null);
+            HttpResponseMessage response = await this.client.PostAsync($"{baseUri}api/HasActiveAnimal", null);
             if (response.IsSuccessStatusCode)
             {
                 JsonSerializerOptions options = new JsonSerializerOptions
