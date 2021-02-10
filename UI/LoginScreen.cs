@@ -60,7 +60,6 @@ namespace Tamagotchi.UI
             isHasActive.Wait();
             bool b = isHasActive.Result;
 
-
             if (b)
             {
                 MainMenu menu = new MainMenu();
