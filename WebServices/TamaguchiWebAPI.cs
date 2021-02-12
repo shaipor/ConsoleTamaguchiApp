@@ -83,7 +83,7 @@ namespace ConsoleTamaguchiApp.WebServices
         public async Task<bool> PlayAsync(ActionsDTO actionsDTO)
         {
             //Set URI to the specific function API
-            string url = $"{this.baseUri}/Play";
+            string url = $"{this.baseUri}api/Play";
             try
             {
                 //Call the server API
@@ -162,8 +162,10 @@ namespace ConsoleTamaguchiApp.WebServices
         {
             try
             {
-
-                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}api/FeedAnimal?action={ac.actionId}",null);
+                string json = JsonSerializer.Serialize(ac);
+                StringContent content1 = new StringContent(json, Encoding.UTF8, "application/json");
+                int actionIdNum = ac.actionId;
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}api/FeedAnimal?actionId={ac.actionId}",content1);
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
