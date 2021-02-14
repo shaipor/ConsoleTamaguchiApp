@@ -29,7 +29,7 @@ namespace ConsoleTamaguchiApp.WebServices
             try
             {
 
-                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetAnimals");
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}api/GetAnimals");
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
@@ -57,7 +57,7 @@ namespace ConsoleTamaguchiApp.WebServices
         {
             try
             {
-                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetAllGames");
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}api/GetAllGames");
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
@@ -83,7 +83,7 @@ namespace ConsoleTamaguchiApp.WebServices
         public async Task<bool> PlayAsync(ActionsDTO actionsDTO)
         {
             //Set URI to the specific function API
-            string url = $"{this.baseUri}/Play";
+            string url = $"{this.baseUri}api/Play";
             try
             {
                 //Call the server API
@@ -135,7 +135,7 @@ namespace ConsoleTamaguchiApp.WebServices
         {
             try 
             {
-                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetFeedingActions");
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}api/GetFeedingActions");
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
@@ -163,7 +163,7 @@ namespace ConsoleTamaguchiApp.WebServices
             try
             {
 
-                HttpResponseMessage response = await this.client.PostAsync($"/FeedAnimal?action={ac.actionId}",null);
+                HttpResponseMessage response = await this.client.PostAsync($"api/FeedAnimal?action={ac.actionId}",null);
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
