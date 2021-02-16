@@ -79,7 +79,35 @@ namespace ConsoleTamaguchiApp.WebServices
                 return null;
             }
         }
-
+        public async Task<PetsDTO> FeedAnimalAsync(ActionsDTO ac)
+        {
+            try
+            {
+                string json = JsonSerializer.Serialize(ac);
+                StringContent content1 = new StringContent(json, Encoding.UTF8, "application/json");
+                int actionIdNum = ac.actionId;
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}api/FeedAnimal?actionId={ac.actionId}", content1);
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    PetsDTO p = JsonSerializer.Deserialize<PetsDTO>(content, options);
+                    return p;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
         public async Task<bool> PlayAsync(ActionsDTO actionsDTO)
         {
             //Set URI to the specific function API
@@ -158,35 +186,7 @@ namespace ConsoleTamaguchiApp.WebServices
             }
 
         }
-        public async Task<PetsDTO>  FeedAnimalAsync(ActionsDTO ac)
-        {
-            try
-            {
-                string json = JsonSerializer.Serialize(ac);
-                StringContent content1 = new StringContent(json, Encoding.UTF8, "application/json");
-                int actionIdNum = ac.actionId;
-                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}api/FeedAnimal?actionId={ac.actionId}",content1);
-                if (response.IsSuccessStatusCode)
-                {
-                    JsonSerializerOptions options = new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    };
-                    string content = await response.Content.ReadAsStringAsync();
-                    PetsDTO p = JsonSerializer.Deserialize<PetsDTO>(content, options);
-                    return p;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
-        }
+
         public async Task<bool> HasActiveAnimal()
         {
             HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}api/HasActiveAnimal", null);
