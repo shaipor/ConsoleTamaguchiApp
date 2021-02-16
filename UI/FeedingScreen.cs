@@ -42,6 +42,7 @@ namespace Tamagotchi.UI
                 else
                 {
                     Task <PetsDTO> pet1= UIMain.api.FeedAnimalAsync(ac);
+                    Console.WriteLine("feeding your pet...");
                     pet1.Wait();
                     if (pet1.Result != null)
                     {

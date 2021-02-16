@@ -43,6 +43,7 @@ namespace Tamagotchi.UI
                 Console.WriteLine($"Please enter your password: ");
                 string password = Console.ReadLine();
                 Task<PlayerDTO> pl= UIMain.api.LoginAsync(userName, password);
+                Console.WriteLine("logging in...");
                 pl.Wait();
                 UIMain.CurrentPlayer = pl.Result;
                 //UIMain.CurrentPlayer = UIMain.db.Login("odedporat@gmail.com", "12345");
