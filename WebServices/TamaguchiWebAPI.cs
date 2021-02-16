@@ -163,7 +163,7 @@ namespace ConsoleTamaguchiApp.WebServices
             try
             {
 
-                HttpResponseMessage response = await this.client.PostAsync($"/FeedAnimal?action={ac.actionId}",null);
+                HttpResponseMessage response = await this.client.PostAsync($"api/FeedAnimal?action={ac.actionId}",null);
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
